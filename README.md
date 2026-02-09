@@ -51,7 +51,7 @@ As a baseline, gesture sequences are flattened and classified using classical sc
 
 A compact Transformer encoder is used to explicitly model temporal dynamics.
 
-**Key design choices:
+Key design choices:
 
 - Input tokens correspond to subsampled skeleton frames
 - Self-attention operates along the temporal dimension
