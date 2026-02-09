@@ -48,17 +48,6 @@ def load_skeleton_data(folder_path, num_frames=60, segment_size=20):
 
     return train_data, train_label
 
-def uniform_subsample(sequence, target_len=30):
-    T_i = sequence.shape[0]
-
-    if T_i < target_len:
-        pad_len = target_len - T_i
-        pad = np.repeat(sequence[-1:], pad_len, axis=0)
-        return np.concatenate([sequence, pad], axis=0)
-
-    indices = np.linspace(0, T_i - 1, target_len).astype(float)
-    return sequence[indices]
-
 class GestureDataset(Dataset):
     def __init__(self, data, labels):
         self.data = data      # shape: (N, T, J, 3)
