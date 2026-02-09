@@ -9,7 +9,7 @@ Skeleton-based gesture recognition is a fundamental problem in human–computer 
 Traditional approaches often rely on frame-level features or sliding-window–based sampling combined with classical classifiers.  
 Such methods have limited ability to explicitly model temporal dynamics.
 
-This project revisits a VR-based hand gesture recognition task originally implemented using scikit-learn classifiers, and explores whether a lightweight Transformer encoder can better capture **temporal motion patterns** under a **low-data regime**.
+This project revisits a VR-based hand gesture recognition task originally implemented using scikit-learn classifiers, and explores whether a lightweight Transformer encoder can better capture temporal motion patterns under a low-data regime.
 
 ---
 
@@ -20,7 +20,6 @@ The dataset consists of VR hand gesture recordings captured as 3D hand joint coo
 - Each frame contains 25 hand joints, represented by (x, y, z) coordinates  
 - Each gesture video contains 100–300 frames, with variable sequence lengths  
 - Gesture classes include static gestures and simple dynamic gestures 
-- Due to slow hand motion and high frame redundancy, raw sequences contain substantial temporal overlap
 
 ---
 
@@ -28,12 +27,9 @@ The dataset consists of VR hand gesture recordings captured as 3D hand joint coo
 
 To enable consistent temporal modelling and reduce redundancy:
 
-- Each gesture sequence is uniformly subsampled
-- The subsampled sequence is divided into 3 temporal segments
+- Each gesture sequence is divided into 3 temporal segments
 - Each segment contains 30 frames
 - Joint coordinates are normalized relative to a reference joint
-
-This preprocessing strategy preserves coarse temporal structure while avoiding highly correlated sliding-window samples.
 
 ---
 
@@ -53,12 +49,9 @@ A compact Transformer encoder is used to explicitly model temporal dynamics.
 
 Key design choices:
 
-- Input tokens correspond to subsampled skeleton frames
-- Self-attention operates along the temporal dimension
 - Model capacity is deliberately constrained to avoid overfitting
 - Mean pooling is applied over temporal features for classification
-
-This design enables temporal modelling while remaining suitable for small datasets.
+- Self-attention operates along the temporal dimension
 
 ---
 
@@ -68,7 +61,6 @@ This design enables temporal modelling while remaining suitable for small datase
 - Models are trained using cross-entropy loss
 - Performance is evaluated using classification accuracy
 - Both training and validation loss / accuracy are monitored  
-- Each experiment is repeated 5 times with different random seeds  
 
 ---
 
